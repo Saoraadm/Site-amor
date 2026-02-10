@@ -216,3 +216,37 @@ h2 {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+
+.trip-helper {
+  margin-top: 0.6rem;
+  font-weight: 600;
+  color: #7d5fa8;
+}
+
+.trip-toggle {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #5c3f78;
+  background: #f6eefc;
+  padding: 0.75rem 0.95rem;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.trip-toggle:hover {
+  background: #ecdff9;
+  transform: translateY(-1px);
+}
+
+.trip-section.is-open .trip-toggle {
+  background: #e8d5fb;
+}
+
+.trip-section .gallery-trip {
+  margin-top: 0.9rem;
+}
