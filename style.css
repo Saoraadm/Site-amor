@@ -153,6 +153,7 @@ h2 {
   }
 }
 
+
 .upload-card {
   margin-bottom: 1rem;
 }
@@ -201,6 +202,7 @@ h2 {
   color: #7d5fa8;
 }
 
+
 .trip-section {
   margin-top: 1rem;
 }
@@ -213,3 +215,4 @@ h2 {
 .gallery-trip {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
+
