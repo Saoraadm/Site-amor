@@ -1,0 +1,154 @@
+/* Estilo romântico com tons suaves e layout responsivo */
+:root {
+  --bg: #fff5fb;
+  --card: #ffffff;
+  --pink: #f8a9c4;
+  --pink-strong: #f17da8;
+  --lilac: #d8c5ff;
+  --text: #5d4057;
+  --shadow: 0 12px 30px rgba(241, 125, 168, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+  background: linear-gradient(160deg, var(--bg), #f7ecff);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.container {
+  width: min(960px, 92%);
+  margin: 2rem auto;
+  padding: 1.2rem;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.tag {
+  font-family: "Brush Script MT", cursive;
+  color: var(--pink-strong);
+  font-size: 1.5rem;
+  margin-bottom: 0.2rem;
+}
+
+h1,
+h2 {
+  margin: 0.4rem 0 0.8rem;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 1.2rem 0 1.4rem;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(120deg, var(--pink), var(--lilac));
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.menu a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(140, 90, 180, 0.28);
+}
+
+.card,
+.image-placeholder {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.card:hover,
+.image-placeholder:hover {
+  transform: translateY(-3px);
+}
+
+.image-placeholder {
+  margin-top: 1rem;
+  border: 2px dashed var(--pink);
+  text-align: center;
+  font-weight: 600;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.9rem;
+}
+
+.gallery-item {
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+  filter: saturate(1.15) brightness(1.03);
+}
+
+.anniversary-card {
+  text-align: center;
+}
+
+.counter {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--pink-strong);
+  padding: 0.6rem;
+  border-radius: 12px;
+  background: #fff0f7;
+}
+
+
+.counter-secondary {
+  color: #7d5fa8;
+  background: #f4edff;
+  margin-top: 0.7rem;
+}
+
+.floating-hearts {
+  position: fixed;
+  top: 12px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  opacity: 0.75;
+}
+
+@media (max-width: 600px) {
+  .tag {
+    font-size: 1.3rem;
+  }
+
+  .menu a {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.95rem;
+  }
+}
