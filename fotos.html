@@ -23,31 +23,17 @@
       <section class="card">
         <h2>Nosso álbum com legendas engraçadas 😄</h2>
         <p>
-          Cole abaixo os links das imagens (GitHub) e a legenda de cada uma. O site puxa e monta
-          a galeria automaticamente.
+          Cada foto tem uma história (e uma legenda) para deixar tudo mais divertido.
         </p>
       </section>
 
-      <section class="card" aria-label="Configuração de imagens do GitHub">
-        <h2>Adicionar fotos do GitHub</h2>
-        <p class="github-help">
-          Formato por linha: <code>URL_DA_IMAGEM | LEGENDA</code><br />
-          Exemplo: <code>https://raw.githubusercontent.com/usuario/repositorio/main/foto1.jpg | O dia que eu estive em um tribunal</code>
-        </p>
-
-        <label for="github-images-input" class="github-label">Links e legendas:</label>
-        <textarea id="github-images-input" class="github-input" rows="7"></textarea>
-
-        <div class="github-actions">
-          <button id="save-github-images" type="button" class="upload-button">Atualizar galeria</button>
-          <button id="reset-github-images" type="button" class="upload-button secondary">Restaurar exemplo</button>
-        </div>
-
-        <p id="github-feedback" class="upload-feedback" aria-live="polite"></p>
+      <section class="gallery photo-gallery" aria-label="Galeria de fotos com legendas engraçadas">
+        <figure class="gallery-item">
+          <img src="images/foto-tribunal.svg" alt="Selfie do casal sorrindo" />
+          <figcaption>O dia que eu estive em um tribunal</figcaption>
+        </figure>
       </section>
-
-      <section id="github-gallery" class="gallery photo-gallery" aria-label="Galeria de fotos com legendas"></section>
-
     </main>
   </body>
+
 </html>
