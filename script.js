@@ -1,6 +1,7 @@
 // Contador simples do tempo de namoro
 (function () {
   const counterEl = document.getElementById("counter");
+
   const dateEl = document.getElementById("anniversary-date");
   if (!counterEl || !dateEl) return;
 
@@ -32,6 +33,7 @@
     const seconds = totalSeconds % 60;
 
     counterEl.textContent = `Estamos juntos há ${plural(days, "dia", "dias")}, ${plural(hours, "hora", "horas")}, ${plural(minutes, "minuto", "minutos")} e ${plural(seconds, "segundo", "segundos")}. 💞`;
+
   }
 
   updateCounter();
