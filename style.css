@@ -125,6 +125,13 @@ h2 {
   background: #fff0f7;
 }
 
+
+.counter-secondary {
+  color: #7d5fa8;
+  background: #f4edff;
+  margin-top: 0.7rem;
+}
+
 .floating-hearts {
   position: fixed;
   top: 12px;
