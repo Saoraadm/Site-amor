@@ -152,3 +152,53 @@ h2 {
     font-size: 0.95rem;
   }
 }
+
+
+.upload-card {
+  margin-bottom: 1rem;
+}
+
+.upload-actions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#photo-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.upload-button {
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(120deg, var(--pink), var(--lilac));
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font: inherit;
+  display: inline-block;
+}
+
+.upload-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(140, 90, 180, 0.28);
+}
+
+.upload-button.secondary {
+  background: linear-gradient(120deg, #bda3df, #e3d6ff);
+  color: #4f3d69;
+}
+
+.upload-feedback {
+  margin-top: 0.7rem;
+  font-weight: 600;
+  color: #7d5fa8;
+}
+
