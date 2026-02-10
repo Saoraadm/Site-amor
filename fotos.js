@@ -1,107 +1,142 @@
-// Upload simples de fotos na página de galeria (sem backend).
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {
+  addDoc,
+  collection,
+  getFirestore,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+import { firebaseConfig } from "./firebase-config.js";
+
 (function () {
   const inputEl = document.getElementById("photo-input");
   const galleryEl = document.getElementById("gallery");
   const feedbackEl = document.getElementById("upload-feedback");
-  const clearBtn = document.getElementById("clear-photos");
+  const uploadBtn = document.getElementById("upload-photo");
 
-  if (!inputEl || !galleryEl || !feedbackEl || !clearBtn) return;
+  if (!inputEl || !galleryEl || !feedbackEl || !uploadBtn) return;
 
-  const STORAGE_KEY = "site-amor-uploaded-photos";
-  const MAX_FILES = 12;
+  function isFirebaseConfigured(config) {
+    return Boolean(
+      config &&
+        config.apiKey &&
+        !config.apiKey.includes("SUA_") &&
+        config.projectId &&
+        !config.projectId.includes("SEU_") &&
+        config.storageBucket &&
+        !config.storageBucket.includes("SEU_")
+    );
+  }
 
   function createFigure(src, altText) {
     const figure = document.createElement("figure");
-    figure.className = "gallery-item gallery-item-uploaded";
+    figure.className = "gallery-item";
 
     const img = document.createElement("img");
     img.src = src;
     img.alt = altText;
+    img.loading = "lazy";
 
     figure.appendChild(img);
     return figure;
   }
 
-  function saveUploadedPhotos(list) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  function renderEmptyState(message) {
+    galleryEl.innerHTML = "";
+    const empty = document.createElement("p");
+    empty.className = "upload-feedback";
+    empty.textContent = message;
+    galleryEl.appendChild(empty);
   }
 
-  function loadUploadedPhotos() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (error) {
-      return [];
-    }
-  }
-
-  function renderUploadedPhotos() {
-    galleryEl.querySelectorAll(".gallery-item-uploaded").forEach((node) => node.remove());
-
-    const uploaded = loadUploadedPhotos();
-    uploaded.forEach((item, index) => {
-      galleryEl.appendChild(createFigure(item.src, item.alt || `Foto enviada ${index + 1}`));
-    });
-  }
-
-  function toDataUrl(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(new Error("Falha ao ler imagem"));
-      reader.readAsDataURL(file);
-    });
-  }
-
-  async function handleFiles(files) {
-    const images = Array.from(files).filter((file) => file.type.startsWith("image/"));
-
-    if (!images.length) {
-      feedbackEl.textContent = "Selecione arquivos de imagem para enviar. 💡";
-      return;
-    }
-
-    const existing = loadUploadedPhotos();
-    const availableSlots = Math.max(MAX_FILES - existing.length, 0);
-
-    if (availableSlots <= 0) {
-      feedbackEl.textContent = `Você já atingiu o limite de ${MAX_FILES} fotos enviadas.`;
-      return;
-    }
-
-    const selected = images.slice(0, availableSlots);
-    const uploaded = [];
-
-    for (const file of selected) {
-      try {
-        const src = await toDataUrl(file);
-        uploaded.push({ src, alt: `Foto enviada: ${file.name}` });
-      } catch (error) {
-        // Se falhar uma imagem, segue com as demais.
-      }
-    }
-
-    const nextList = [...existing, ...uploaded];
-    saveUploadedPhotos(nextList);
-    renderUploadedPhotos();
-
-    const ignoredCount = images.length - selected.length;
+  if (!isFirebaseConfigured(firebaseConfig)) {
     feedbackEl.textContent =
-      ignoredCount > 0
-        ? `Adicionamos ${uploaded.length} foto(s)! ${ignoredCount} foi(ram) ignorada(s) por limite.`
-        : `Adicionamos ${uploaded.length} foto(s) com sucesso! 💖`;
+      "Configure o arquivo firebase-config.js para ativar o mural com Firebase.";
+    uploadBtn.disabled = true;
+    renderEmptyState("Mural indisponível até configurar o Firebase.");
+    return;
   }
 
-  inputEl.addEventListener("change", (event) => {
-    handleFiles(event.target.files);
-    inputEl.value = "";
-  });
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+  const photosCollection = collection(db, "photoWall");
 
-  clearBtn.addEventListener("click", () => {
-    localStorage.removeItem(STORAGE_KEY);
-    renderUploadedPhotos();
-    feedbackEl.textContent = "As fotos enviadas foram removidas deste navegador.";
-  });
+  async function uploadSelectedPhoto() {
+    const file = inputEl.files && inputEl.files[0];
 
-  renderUploadedPhotos();
+    if (!file) {
+      feedbackEl.textContent = "Selecione uma imagem antes de enviar. 💡";
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      feedbackEl.textContent = "Apenas imagens são permitidas.";
+      return;
+    }
+
+    uploadBtn.disabled = true;
+    feedbackEl.textContent = "Enviando foto para o mural...";
+
+    try {
+      const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
+      const filePath = `photo-wall/${Date.now()}-${safeName}`;
+      const imageRef = ref(storage, filePath);
+
+      await uploadBytes(imageRef, file);
+      const downloadURL = await getDownloadURL(imageRef);
+
+      await addDoc(photosCollection, {
+        imageUrl: downloadURL,
+        filePath,
+        fileName: file.name,
+        createdAt: serverTimestamp()
+      });
+
+      feedbackEl.textContent = "Foto enviada com sucesso! 💖";
+      inputEl.value = "";
+    } catch (error) {
+      feedbackEl.textContent = "Não foi possível enviar a foto. Verifique a configuração do Firebase.";
+    } finally {
+      uploadBtn.disabled = false;
+    }
+  }
+
+  uploadBtn.addEventListener("click", uploadSelectedPhoto);
+
+  const photosQuery = query(photosCollection, orderBy("createdAt", "desc"));
+
+  onSnapshot(
+    photosQuery,
+    (snapshot) => {
+      galleryEl.innerHTML = "";
+
+      if (snapshot.empty) {
+        renderEmptyState("Nenhuma foto no mural ainda. Envie a primeira! ✨");
+        return;
+      }
+
+      snapshot.forEach((docItem, index) => {
+        const data = docItem.data();
+        if (!data.imageUrl) return;
+
+        const altText = data.fileName
+          ? `Foto do mural: ${data.fileName}`
+          : `Foto do mural ${index + 1}`;
+
+        galleryEl.appendChild(createFigure(data.imageUrl, altText));
+      });
+    },
+    () => {
+      renderEmptyState("Não foi possível carregar o mural agora.");
+    }
+  );
 })();
