@@ -20,26 +20,24 @@
         <a href="aniversario.html">Aniversário</a>
       </nav>
 
-[
-      <section class="card upload-card" aria-label="Enviar foto para o mural público">
-        <h2>Adicionar foto no mural público 💕</h2>
+      <section class="card">
+        <h2>Nosso álbum com legendas engraçadas 😄</h2>
         <p>
-          Envie uma imagem para aparecer no mural de fotos. Todas as fotos ficam visíveis para
-          quem acessar esta página.
+          Aqui fica nossa galeria. Para adicionar novas fotos, basta copiar um bloco
+          <code>&lt;figure&gt;</code> e trocar a URL da imagem e a legenda.
         </p>
-
-        <div class="upload-actions">
-          <label for="photo-input" class="upload-button">Selecionar foto</label>
-          <input id="photo-input" type="file" accept="image/*" />
-          <button id="upload-photo" type="button" class="upload-button secondary">Enviar foto</button>
-        </div>
-
-        <p id="upload-feedback" class="upload-feedback" aria-live="polite"></p>
       </section>
 
-      <section id="gallery" class="gallery" aria-label="Mural público de fotos"></section>
+      <section class="gallery photo-gallery" aria-label="Galeria de fotos do casal">
+        <figure class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80"
+            alt="Foto do casal sorrindo"
+            loading="lazy"
+          />
+          <figcaption>O dia que eu estive em um tribunal</figcaption>
+        </figure>
+      </section>
     </main>
-
-    <script type="module" src="fotos.js"></script>
-[
+  </body>
 </html>
