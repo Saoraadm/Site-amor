@@ -216,3 +216,15 @@ h2 {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+
+.photo-gallery {
+  margin-top: 1rem;
+}
+
+.gallery-item figcaption {
+  padding: 0.65rem 0.75rem;
+  background: #fff0f7;
+  color: #7d5fa8;
+  font-weight: 600;
+  text-align: center;
+}
