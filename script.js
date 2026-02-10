@@ -4,7 +4,7 @@
   if (!counterEl) return;
 
   // Defina aqui a data de início do namoro (ano, mês-1, dia)
-  const startDate = new Date(2022, 5, 12, 0, 0, 0);
+  const startDate = new Date(2025, 10, 29, 0, 0, 0);
 
   function updateCounter() {
     const now = new Date();
