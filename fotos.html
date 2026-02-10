@@ -20,26 +20,35 @@
         <a href="aniversario.html">Aniversário</a>
       </nav>
 
-[
-      <section class="card upload-card" aria-label="Enviar foto para o mural público">
-        <h2>Adicionar foto no mural público 💕</h2>
+      <section class="card">
+        <h2>Nosso álbum com legendas engraçadas 😄</h2>
         <p>
-          Envie uma imagem para aparecer no mural de fotos. Todas as fotos ficam visíveis para
-          quem acessar esta página.
+          Cole abaixo os links das imagens (GitHub) e a legenda de cada uma. O site puxa e monta
+          a galeria automaticamente.
         </p>
-
-        <div class="upload-actions">
-          <label for="photo-input" class="upload-button">Selecionar foto</label>
-          <input id="photo-input" type="file" accept="image/*" />
-          <button id="upload-photo" type="button" class="upload-button secondary">Enviar foto</button>
-        </div>
-
-        <p id="upload-feedback" class="upload-feedback" aria-live="polite"></p>
       </section>
 
-      <section id="gallery" class="gallery" aria-label="Mural público de fotos"></section>
+      <section class="card" aria-label="Configuração de imagens do GitHub">
+        <h2>Adicionar fotos do GitHub</h2>
+        <p class="github-help">
+          Formato por linha: <code>URL_DA_IMAGEM | LEGENDA</code><br />
+          Exemplo: <code>https://raw.githubusercontent.com/usuario/repositorio/main/foto1.jpg | O dia que eu estive em um tribunal</code>
+        </p>
+
+        <label for="github-images-input" class="github-label">Links e legendas:</label>
+        <textarea id="github-images-input" class="github-input" rows="7"></textarea>
+
+        <div class="github-actions">
+          <button id="save-github-images" type="button" class="upload-button">Atualizar galeria</button>
+          <button id="reset-github-images" type="button" class="upload-button secondary">Restaurar exemplo</button>
+        </div>
+
+        <p id="github-feedback" class="upload-feedback" aria-live="polite"></p>
+      </section>
+
+      <section id="github-gallery" class="gallery photo-gallery" aria-label="Galeria de fotos com legendas"></section>
     </main>
 
-    <script type="module" src="fotos.js"></script>
-[
+    <script src="fotos-github.js"></script>
+  </body>
 </html>

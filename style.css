@@ -216,3 +216,44 @@ h2 {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+
+.photo-gallery {
+  margin-top: 1rem;
+}
+
+.gallery-item figcaption {
+  padding: 0.65rem 0.75rem;
+  background: #fff0f7;
+  color: #7d5fa8;
+  font-weight: 600;
+  text-align: center;
+}
+
+.github-help {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+}
+
+.github-label {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.github-input {
+  width: 100%;
+  border: 1px solid #ebc8da;
+  border-radius: 12px;
+  padding: 0.75rem;
+  resize: vertical;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+}
+
+.github-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
