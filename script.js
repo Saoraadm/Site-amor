@@ -5,8 +5,6 @@
   const dateEl = document.getElementById("anniversary-date");
   if (!counterEl || !nextMonthCounterEl || !dateEl) return;
 
-
-
   function parseDateBR(value) {
     const [day, month, year] = value.split("/").map(Number);
     if (!day || !month || !year) return null;

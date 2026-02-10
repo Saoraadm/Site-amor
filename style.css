@@ -202,3 +202,17 @@ h2 {
   color: #7d5fa8;
 }
 
+
+.trip-section {
+  margin-top: 1rem;
+}
+
+.trip-description {
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+}
+
+.gallery-trip {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
