@@ -10,36 +10,30 @@
     <main class="container">
       <header class="hero">
         <p class="tag">📷 Memórias em cada clique</p>
-        <h1>Mural de Fotos</h1>
+        <h1>Galeria de Fotos</h1>
       </header>
 
       <nav class="menu" aria-label="Navegação principal">
         <a href="index.html">Início</a>
+
         <a href="viagens.html">Viagens</a>
+
         <a href="fotos.html">Fotos</a>
         <a href="aniversario.html">Aniversário</a>
       </nav>
 
-[
-      <section class="card upload-card" aria-label="Enviar foto para o mural público">
-        <h2>Adicionar foto no mural público 💕</h2>
-        <p>
-          Envie uma imagem para aparecer no mural de fotos. Todas as fotos ficam visíveis para
-          quem acessar esta página.
-        </p>
 
-        <div class="upload-actions">
-          <label for="photo-input" class="upload-button">Selecionar foto</label>
-          <input id="photo-input" type="file" accept="image/*" />
-          <button id="upload-photo" type="button" class="upload-button secondary">Enviar foto</button>
-        </div>
+      <section id="gallery" class="gallery" aria-label="Galeria simples de fotos">
 
-        <p id="upload-feedback" class="upload-feedback" aria-live="polite"></p>
+        <figure class="gallery-item"><img src="https://picsum.photos/seed/casal1/600/420" alt="Momento fofo do casal 1" /></figure>
+        <figure class="gallery-item"><img src="https://picsum.photos/seed/casal2/600/420" alt="Momento fofo do casal 2" /></figure>
+        <figure class="gallery-item"><img src="https://picsum.photos/seed/casal3/600/420" alt="Momento fofo do casal 3" /></figure>
+        <figure class="gallery-item"><img src="https://picsum.photos/seed/casal4/600/420" alt="Momento fofo do casal 4" /></figure>
+        <figure class="gallery-item"><img src="https://picsum.photos/seed/casal5/600/420" alt="Momento fofo do casal 5" /></figure>
+        <figure class="gallery-item"><img src="https://picsum.photos/seed/casal6/600/420" alt="Momento fofo do casal 6" /></figure>
       </section>
-
-      <section id="gallery" class="gallery" aria-label="Mural público de fotos"></section>
     </main>
 
-    <script type="module" src="fotos.js"></script>
-[
+
+  </body>
 </html>
